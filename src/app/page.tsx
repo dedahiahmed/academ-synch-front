@@ -1,10 +1,9 @@
-import { SignIn } from "@clerk/nextjs";
+import SignIn from "@/components/SignIn/SignIn";
 
 export default function Home() {
   return (
     <>
-      {" "}
-      <SignIn signUpUrl={"/sign-up"} />
+      <SignIn />
     </>
   );
 }

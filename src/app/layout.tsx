@@ -1,16 +1,19 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ClerkLoaded, ClerkProvider } from "@clerk/nextjs";
-import { frFR } from "@clerk/localizations";
 
 const inter = Inter({ subsets: ["latin"] });
 const frontServerUrl = process.env.Front_SERVER_URL || "http://localhost:3000/";
-const ClerkKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || "";
+
 export const metadata: Metadata = {
+  icons: {
+    icon: "/assets/academ.svg",
+    apple: "/assets/academ.svg",
+  },
   metadataBase: new URL(frontServerUrl),
-  title: "SynchroÉtudes",
-  description: "Connectez-vous et synchronisez vos cours avec SynchroÉtudes.",
+  title: "synchronisation academical",
+  description:
+    "Connectez-vous et synchronisez vos cours avec synchronisation academical.",
 };
 
 export default function RootLayout({
@@ -20,21 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <ClerkProvider
-        localization={frFR}
-        appearance={{
-          variables: {
-            fontFamily: "Raleway",
-            colorPrimary: "#4C82D0",
-            colorDanger: "#C54141",
-          },
-        }}
-        key={ClerkKey}
-      >
-        <body className={inter.className}>
-          <ClerkLoaded>{children}</ClerkLoaded>
-        </body>
-      </ClerkProvider>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
