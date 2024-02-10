@@ -1,9 +1,10 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { FormProvider, useForm } from "react-hook-form";
 
 export default function SignIn() {
+  const [errorMessage, setErrorMessage] = useState<string | null>(null); // State variable to store error message
   const methods = useForm<login>({ mode: "all" });
   const {
     register,
@@ -23,13 +24,16 @@ export default function SignIn() {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to sign in");
+        const errorData = await response.json();
+        throw new Error(errorData.detail);
       }
 
       const responseData = await response.json();
       console.log(responseData);
-    } catch (error) {
+      window.location.href = "/home";
+    } catch (error: any) {
       console.error("Error:", error);
+      setErrorMessage(error.message);
     }
   };
 
@@ -97,7 +101,9 @@ export default function SignIn() {
                 )}
               </div>
             </div>
-
+            {errorMessage && (
+              <p className=" text-sm text-red-500">{errorMessage}</p>
+            )}
             <div className="flex">
               <button
                 type="submit"
