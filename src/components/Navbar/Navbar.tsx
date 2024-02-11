@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useLocation } from "react-router-dom";
 import NavLink from "../NavLink/NavLink";
 import MobileNavbar from "./components/MobileNavbar/MobileNavbar";
+import Logout from "../Logout/Logout";
 
 const Navbar = () => {
   const location = useLocation();
@@ -46,9 +47,7 @@ const Navbar = () => {
         </NavLink>
       </div>
 
-      <button className="hidden md:inline-block lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200">
-        se deconnecter
-      </button>
+      <Logout />
     </nav>
   );
 };

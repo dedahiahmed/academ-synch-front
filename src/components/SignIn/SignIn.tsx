@@ -29,7 +29,7 @@ export default function SignIn() {
       }
 
       const responseData = await response.json();
-      console.log(responseData);
+      localStorage.setItem("accessToken", responseData.access_token);
       window.location.href = "/home";
     } catch (error: any) {
       console.error("Error:", error);
