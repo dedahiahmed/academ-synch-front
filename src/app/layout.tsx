@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import MobileNavBar from "@/components/MobileNavBar/MobileNavBar";
 
+import { BrowserRouter } from "react-router-dom";
+
 const inter = Inter({ subsets: ["latin"] });
 const frontServerUrl = process.env.Front_SERVER_URL || "http://localhost:3000/";
 
