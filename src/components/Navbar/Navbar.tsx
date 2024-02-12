@@ -36,7 +36,7 @@ const Navbar = () => {
         <NavLink to="/home" currentPath={location.pathname}>
           Accueil
         </NavLink>
-        <NavLink to="/about" currentPath={location.pathname}>
+        <NavLink to="/course" currentPath={location.pathname}>
           Cours
         </NavLink>
         <NavLink to="/about" currentPath={location.pathname}>
