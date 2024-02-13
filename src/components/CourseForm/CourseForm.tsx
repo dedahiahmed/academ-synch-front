@@ -8,17 +8,51 @@ import { filesTypeList } from "@/data/data-base/file-types/file-types";
 import { FormProvider, useForm } from "react-hook-form";
 import Navbar from "../Navbar/Navbar";
 import { BrowserRouter } from "react-router-dom";
+import uploadFiles from "../../../utils/upload-file/upload-file";
 
 export default function CourseForm() {
   const [files, setFiles] = useState<File[]>([]);
   const form = useForm<courseType>({ mode: "all" });
   const { register, handleSubmit, formState, reset, control } = form;
   const { errors } = formState;
+  const onSubmit = async (data: courseType) => {
+    try {
+      // Upload files
+      const uploadedFileIds = await uploadFiles(files);
+
+      // Construct request data with uploaded file UUIDs
+      const requestData = {
+        ...data,
+        teacher_id: 1,
+        files: uploadedFileIds,
+      };
+
+      // Send request to create course
+      const response = await fetch("/api/course", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail);
+      }
+
+      const responseData = await response.json();
+      console.log("-----------", responseData);
+    } catch (error: any) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <div className="bg-gray-100">
       {" "}
       <BrowserRouter>
-        {" "}
         <Navbar />
       </BrowserRouter>
       <p className="text-xl text-black font-normal  flex justify-start items-start bg-gray-100  mt-[1rem] ml-[5rem]">
@@ -27,6 +61,7 @@ export default function CourseForm() {
       <div className="w-full px-[20rem] h-full bg-gray-100 pb-[3rem] py-[1rem]  ">
         <FormProvider {...form}>
           <form
+            onSubmit={handleSubmit(onSubmit)}
             className=" mt-[1.25rem] lg:mt-[2.5rem] space-y-4 bg-white rounded shadow-lg p-4 px-4 w-full h-full "
             noValidate
           >
@@ -37,12 +72,12 @@ export default function CourseForm() {
             {/*City */}
             <div className="flex flex-col  gap-[0.5rem] ">
               <p className=" mb-[0.37rem] font-text text-[0.875rem] font-[500] leading-[1.375rem]  lg:mb-[0.5rem] lg:text-[0.9375rem] lg:leading-[1.25rem]">
-                Semestre
+                semester
               </p>
               <DropDown
                 placeHolder="Sélectionner un semestre."
                 requiredMessage="Vous devez choisir le semestre."
-                name="city"
+                name="semester"
                 list={semesterList}
               />
             </div>
@@ -54,7 +89,7 @@ export default function CourseForm() {
               <DropDown
                 placeHolder="Sélectionner un le type du document."
                 requiredMessage=" Vous devez sélectionner le secteur d'activité de votre entreprise."
-                name="Type"
+                name="type"
                 list={courseType}
               />
             </div>
