@@ -2,13 +2,22 @@ export async function POST(request: Request): Promise<Response> {
   try {
     const url = process.env.FILE || ""; // Update the environment variable name
     const requestData = await request.formData(); // Use formData() for file uploads
+    const token = request.headers.get("Authorization");
 
+    const headers: Record<string, string> = {}; // Remove Content-Type header
+
+    // Only include the Authorization header if token is not null
+    if (token !== null) {
+      headers.Authorization = `Bearer ${token}`;
+      console.log("token", token);
+    }
     const response = await fetch(url, {
       method: "POST",
+      headers: headers, // Pass headers directly
       body: requestData, // Pass the form data directly
     });
 
-    // Parse the JSON body if it's present
+    // Parse the response body if it's present
     let responseBody;
     try {
       responseBody = await response.json();

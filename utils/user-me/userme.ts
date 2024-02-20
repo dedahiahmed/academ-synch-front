@@ -1,16 +1,12 @@
-export async function getCurrentUser(): Promise<Record<string, any>> {
-  const accessToken = localStorage.getItem("accessToken");
-  console.log("accesToken", accessToken);
-  if (!accessToken) {
-    throw new Error("Access token not found in local storage");
-  }
-
+export async function getCurrentUser(
+  token: string
+): Promise<Record<string, any>> {
   try {
     const response = await fetch("/api/userme", {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
+        Authorization: token, // Include the authorization token
       },
     });
 

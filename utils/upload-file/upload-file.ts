@@ -1,4 +1,4 @@
-export default async function uploadFiles(files: File[]) {
+export default async function uploadFiles(files: File[], token: string) {
   const formData = new FormData();
   Array.from(files).forEach((file, index) => {
     formData.append(`files`, file);
@@ -7,6 +7,9 @@ export default async function uploadFiles(files: File[]) {
   try {
     const response = await fetch("/api/file", {
       method: "POST",
+      headers: {
+        Authorization: token,
+      },
       body: formData,
     });
 

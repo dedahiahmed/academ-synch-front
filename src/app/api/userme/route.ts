@@ -1,20 +1,23 @@
 export async function GET(request: Request): Promise<Response> {
   try {
     const url = process.env.USERME || "";
-    const accessToken = request.headers.get("Authorization");
-    console.log("accesToken", accessToken);
-    const headersObject: Record<string, string> = {};
-    request.headers.forEach((value, name) => {
-      headersObject[name] = value;
-    });
 
-    console.log("Headers:", headersObject);
+    // Retrieve the token from the request headers
+    const token = request.headers.get("Authorization");
+
+    const headers: Record<string, string> = {
+      "Content-Type": "application/json",
+    };
+
+    // Only include the Authorization header if token is not null
+    if (token !== null) {
+      headers.Authorization = `Bearer ${token}`;
+      console.log("token", token);
+    }
+
     const response = await fetch(url, {
       method: "GET",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json", // Set the content type header
-      },
+      headers: headers,
     });
 
     // Parse the JSON body if it's present

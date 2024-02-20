@@ -2,12 +2,22 @@ export async function POST(request: Request): Promise<Response> {
   try {
     const url = process.env.COURSE || "";
     const requestData = await request.json();
+    const token = request.headers.get("Authorization");
 
+    const headers: Record<string, string> = {
+      "Content-Type": "application/json",
+    };
+
+    // Only include the Authorization header if token is not null
+    if (token !== null) {
+      headers.Authorization = `Bearer ${token}`;
+      console.log("token", token);
+    }
+    console.log("+--+-+-+", headers);
+    console.log("+--+-+-+", JSON.stringify(requestData));
     const response = await fetch(url, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json", // Set the content type header
-      },
+      headers: headers,
       body: JSON.stringify(requestData), // Pass the JSON data directly
     });
 

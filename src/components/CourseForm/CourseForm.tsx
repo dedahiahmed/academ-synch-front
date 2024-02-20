@@ -9,6 +9,8 @@ import { FormProvider, useForm } from "react-hook-form";
 import Navbar from "../Navbar/Navbar";
 import { BrowserRouter } from "react-router-dom";
 import uploadFiles from "../../../utils/upload-file/upload-file";
+import { getCurrentUser } from "../../../utils/user-me/userme";
+import uploadMultiplesFiles from "../../../utils/upload-files/upload-files";
 
 export default function CourseForm() {
   const [files, setFiles] = useState<File[]>([]);
@@ -17,8 +19,10 @@ export default function CourseForm() {
   const { errors } = formState;
   const onSubmit = async (data: courseType) => {
     try {
-      // Upload files
-      const uploadedFileIds = await uploadFiles(files);
+      const accessToken = localStorage.getItem("accessToken") as string;
+      // await getCurrentUser(accessToken);
+      //  Upload files
+      const uploadedFileIds = await uploadMultiplesFiles("course", files);
 
       // Construct request data with uploaded file UUIDs
       const requestData = {
@@ -31,7 +35,7 @@ export default function CourseForm() {
       const response = await fetch("/api/course", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          Authorization: accessToken,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(requestData),
