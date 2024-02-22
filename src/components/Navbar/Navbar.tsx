@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-
+import Image from "next/image";
 export default function Navbar() {
   const [state, setState] = React.useState(false);
   const [currentPath, setCurrentPath] = React.useState(
@@ -34,7 +34,7 @@ export default function Navbar() {
         <div className="items-center gap-x-14 px-4 max-w-screen-xl mx-auto md:flex md:px-8">
           <div className="flex items-center justify-between py-3 md:py-5 md:block">
             <a href="/">
-              <img
+              <Image
                 src="/assets/academ.svg"
                 width={80}
                 height={50}
@@ -102,7 +102,7 @@ export default function Navbar() {
                 <li>
                   <a
                     href="#"
-                    className="block py-3 px-4 font-medium text-center text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 active:shadow-none rounded-lg shadow md:inline"
+                    className="block py-3 px-4 font-medium text-center text-white bg-sky-500 hover:bg-sky-600 active:bg-sky-700 active:shadow-none rounded-lg shadow md:inline"
                   >
                     se connecter
                   </a>

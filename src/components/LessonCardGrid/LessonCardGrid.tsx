@@ -9,27 +9,23 @@ interface LessonCardGridProps {
     thumbnail: string;
     title: string;
     description: string;
-    duration: string;
-    slug: string;
   };
 }
 
 const LessonCardGrid: React.FC<LessonCardGridProps> = ({
   idx,
-  item: { thumbnail, title, description, duration, slug },
+  item: { thumbnail, title, description },
 }) => {
   return (
     <div className="space-y-2 sm:max-w-sm">
-      <Link href={`/tutorials/cs50/${slug}`}>
-        <img src={thumbnail} className="rounded-lg w-full" alt={title} />
-      </Link>
+      <img src={thumbnail} className="rounded-lg w-full" alt={title} />
+
       <div className="pt-2 text-sm flex items-center justify-between">
-        <SubTitle>Lesson {idx + 1}</SubTitle>
-        <Duration>{duration}</Duration>
+        <SubTitle>
+          <Link href={`/tutorials/cs50/`}>{title}</Link>
+        </SubTitle>
       </div>
-      <Title>
-        <Link href={`/tutorials/cs50/${slug}`}>{title}</Link>
-      </Title>
+
       <p>{description}</p>
     </div>
   );
