@@ -1,19 +1,22 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
+import { ReactNode } from "react";
 
-const NavLink: React.FC<NavLinkProps> = ({ to, currentPath, children }) => {
-  const isActive = currentPath === to;
-  return (
-    <a
-      href={to}
-      className={`py-2 px-4 relative ${
-        isActive ? "text-blue-500" : "text-gray-500"
-      }`}
+interface NavLinkProps {
+  children: ReactNode;
+  href: string;
+  className?: string;
+  scroll?: boolean; // Define the scroll prop
+}
+
+const NavLink: React.FC<NavLinkProps> = ({ children, href, ...props }) => (
+  <Link href={href}>
+    <div
+      {...props}
+      className={`py-2.5 px-4 text-center rounded-lg duration-150 ${props.className || ""}`}
     >
       {children}
-      {isActive && (
-        <div className="w-[100%] h-[0.2rem] absolute bottom-[-1.2rem] left-0 bg-[#0a5bcf]" />
-      )}
-    </a>
-  );
-};
+    </div>
+  </Link>
+);
+
 export default NavLink;

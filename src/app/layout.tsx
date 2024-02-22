@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import MobileNavBar from "@/components/MobileNavBar/MobileNavBar";
 
 import { BrowserRouter } from "react-router-dom";
+import Footer from "@/components/Footer/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 const frontServerUrl = process.env.Front_SERVER_URL || "http://localhost:3000/";
@@ -26,10 +26,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className={inter.className}>
-        <MobileNavBar />
-        {children}
-      </body>
+      <body className={inter.className}>{children}</body>
+      <Footer />
     </html>
   );
 }
