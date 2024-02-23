@@ -122,7 +122,7 @@ export default function Navbar() {
                   </a>
                 </Dropdown>
               </li>
-              <SignedOut>
+              <SignedIn>
                 <li>
                   <Dropdown overlay={coursMenu} className="flex flex-row">
                     <a
@@ -147,7 +147,7 @@ export default function Navbar() {
                     </a>
                   </Dropdown>
                 </li>
-              </SignedOut>
+              </SignedIn>
               {navigation.map((item, idx) => (
                 <li key={idx}>
                   <a
