@@ -1,12 +1,13 @@
 import React from "react";
 import Image from "next/image";
 import { Dropdown, Menu } from "antd";
+import SignedIn from "../SignedIn/SignedIn";
+import SignedOut from "../SignedOut/SignedOut";
 
 export default function Navbar() {
   const [state, setState] = React.useState(false);
 
   const navigation = [
-    { title: "Courses", path: "/courses" },
     { title: "Customers", path: "/customers" },
     { title: "Pricing", path: "/pricing" },
   ];
@@ -25,7 +26,20 @@ export default function Navbar() {
       </Menu.Item>
     </Menu>
   );
-
+  const coursMenu = (
+    <Menu>
+      <Menu.Item key="1" onClick={() => handleNavigation("/gestion-cours")}>
+        Gestion des cours
+      </Menu.Item>
+      <Menu.Item key="2" onClick={() => handleNavigation("/lire-cours")}>
+        Lire le cours
+      </Menu.Item>
+    </Menu>
+  );
+  const handleSignOut = () => {
+    localStorage.removeItem("accessToken"); // Clear access token from local storage
+    window.location.reload(); // Refresh the page
+  };
   return (
     <>
       <nav
@@ -84,16 +98,6 @@ export default function Navbar() {
             } `}
           >
             <ul className="items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
-              {navigation.map((item, idx) => (
-                <li key={idx}>
-                  <a
-                    href={item.path}
-                    className={`block text-gray-700 hover:text-indigo-600`}
-                  >
-                    {item.title}
-                  </a>
-                </li>
-              ))}
               <li>
                 <Dropdown overlay={formationMenu} className="flex flex-row">
                   <a
@@ -118,23 +122,74 @@ export default function Navbar() {
                   </a>
                 </Dropdown>
               </li>
+              <SignedOut>
+                <li>
+                  <Dropdown overlay={coursMenu} className="flex flex-row">
+                    <a
+                      className="ant-dropdown-link"
+                      onClick={(e) => e.preventDefault()}
+                    >
+                      Cours
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        className={`w-4 h-4 ml-1 mt-0.5 transition-transform ${
+                          state ? "transform rotate-180" : ""
+                        }`}
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M4.293 7.293a1 1 0 011.414 0L12 13.586l6.293-6.293a1 1 0 111.414 1.414l-7 7a1 1 0 01-1.414 0l-7-7a1 1 0 010-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </a>
+                  </Dropdown>
+                </li>
+              </SignedOut>
+              {navigation.map((item, idx) => (
+                <li key={idx}>
+                  <a
+                    href={item.path}
+                    className={`block text-gray-700 hover:text-indigo-600`}
+                  >
+                    {item.title}
+                  </a>
+                </li>
+              ))}
+
               <div className="flex-1 items-center justify-end gap-x-6 space-y-3 md:flex md:space-y-0">
-                <li>
-                  <a
-                    href="signup"
-                    className="block py-3 text-center text-gray-700 hover:text-indigo-600 border rounded-lg md:border-none"
-                  >
-                    créer un compte
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="signin"
-                    className="block py-3 px-4 font-medium text-center text-white bg-sky-500 hover:bg-sky-600 active:bg-sky-700 active:shadow-none rounded-lg shadow md:inline"
-                  >
-                    se connecter
-                  </a>
-                </li>
+                <SignedOut>
+                  <li>
+                    <a
+                      href="signup"
+                      className="block py-3 text-center text-gray-700 hover:text-indigo-600 border rounded-lg md:border-none"
+                    >
+                      créer un compte
+                    </a>
+                  </li>
+                </SignedOut>
+                <SignedOut>
+                  <li>
+                    <a
+                      href="signin"
+                      className="block py-3 px-4 font-medium text-center text-white bg-sky-500 hover:bg-sky-600 active:bg-sky-700 active:shadow-none rounded-lg shadow md:inline"
+                    >
+                      se connecter
+                    </a>
+                  </li>
+                </SignedOut>
+                <SignedIn>
+                  <li>
+                    <button
+                      onClick={() => handleSignOut()}
+                      className="block py-3 px-4 font-medium text-center text-white bg-sky-500 hover:bg-sky-600 active:bg-sky-700 active:shadow-none rounded-lg shadow md:inline"
+                    >
+                      Se déconnecter
+                    </button>
+                  </li>
+                </SignedIn>
               </div>
             </ul>
           </div>
