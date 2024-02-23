@@ -17,7 +17,8 @@ export default function page() {
   ];
   const [values, setValues] = useState<FormationFilterType>({
     semestre: [],
-    title: [],
+    type_du_module: [],
+    title: "",
   });
   const [showFilters, setShowFilters] = useState(false);
 
@@ -38,7 +39,7 @@ export default function page() {
     <>
       <Navbar />
 
-      <div className=" mb-[6.25rem] w-[100%] py-[2.25rem] lg:py-[4rem] pl-[0.5rem] pr-[1rem] lg:px-[10.38rem] flex flex-col ">
+      <div className=" mb-[6.25rem] w-[100%] py-[2.25rem] lg:py-[4rem] pl-[0.5rem] pr-[1rem] lg:px-[7.38rem] flex flex-col ">
         <p className="mb-[1.88rem] lg:mb-16 ml-[1.5rem] text-start lg:ml-0 lg:text-start text-[1.375rem] leading-[1.875rem] font-bold text-black md:mb-16 md:text-2xl md:leading-9 lg:text-3xl lg:leading-10 whitespace-nowrap overflow-hidden">
           Master Professionnel en Informatique Appliquée á la Gestion
         </p>
