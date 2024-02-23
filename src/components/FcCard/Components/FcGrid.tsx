@@ -9,6 +9,7 @@ interface FcGridProps {
     intitulé_du_module: string;
     type_du_module: string;
     credits: number;
+    description: string;
   }[];
 }
 
@@ -43,6 +44,7 @@ const FcGrid: React.FC<FcGridProps> = ({ data }) => {
           type={item.type_du_module}
           credits={item.credits}
           semestre={item.semestre}
+          description={item.description}
         />
       ))}
       <div className="text-right mt-4">
