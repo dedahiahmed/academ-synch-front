@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { BrowserRouter } from "react-router-dom";
 import Footer from "@/components/Footer/Footer";
+import Navbar from "@/components/Navbar/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 const frontServerUrl = process.env.Front_SERVER_URL || "http://localhost:3000/";

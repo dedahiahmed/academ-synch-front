@@ -8,8 +8,8 @@ export default function Navbar() {
   );
 
   const navigation = [
-    { title: "Courses", path: "/course" },
-    { title: "Formations", path: "/formations" },
+    { title: "Courses", path: "/courses" },
+    { title: "Formations", path: "/formation" },
     { title: "Customers", path: "/customers" },
     { title: "Pricing", path: "/pricing" },
   ];
@@ -77,14 +77,14 @@ export default function Navbar() {
             </div>
           </div>
           <div
-            className={`nav-menu flex-1 pb-3 mt-8 md:block md:pb-0 md:mt-0 ${state ? "block" : "hidden"}`}
+            className={`nav-menu flex-1 pb-3 mt-8 md:block md:pb-0 md:mt-0 ${state ? "block" : "hidden"} `}
           >
             <ul className="items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
               {navigation.map((item, idx) => (
                 <li key={idx}>
                   <a
                     href={item.path}
-                    className={`block text-gray-700 hover:text-indigo-600 ${currentPath === item.path ? "border-b-2 border-indigo-600" : ""}`}
+                    className={`block text-gray-700 hover:text-indigo-600 ${currentPath === item.path ? "border-b-2 border-sky-500 " : ""}`}
                   >
                     {item.title}
                   </a>

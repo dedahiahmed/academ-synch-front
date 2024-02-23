@@ -24,7 +24,7 @@ export default function Footer() {
           <div className="items-center gap-x-3 space-y-3 sm:flex sm:justify-center sm:space-y-0">
             <a
               href="javascript:void(0)"
-              className="block py-2 px-4 text-center text-white font-medium bg-indigo-600 duration-150 hover:bg-indigo-500 active:bg-indigo-700 rounded-lg shadow-lg hover:shadow-none"
+              className="block py-2 px-4 text-center text-white font-medium bg-sky-500 duration-150 hover:bg-sky-600 active:bg-sky-700 rounded-lg shadow-lg hover:shadow-none"
             >
               créer un compte
             </a>
