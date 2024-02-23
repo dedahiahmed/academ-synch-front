@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Dropdown, Menu } from "antd";
 import SignedIn from "../SignedIn/SignedIn";
 import SignedOut from "../SignedOut/SignedOut";
+import CourseDropDown from "./Components/CourseDropDown/CourseDropDown";
 
 export default function Navbar() {
   const [state, setState] = React.useState(false);
@@ -26,16 +27,7 @@ export default function Navbar() {
       </Menu.Item>
     </Menu>
   );
-  const coursMenu = (
-    <Menu>
-      <Menu.Item key="1" onClick={() => handleNavigation("/gestion-cours")}>
-        Gestion des cours
-      </Menu.Item>
-      <Menu.Item key="2" onClick={() => handleNavigation("/lire-cours")}>
-        Lire le cours
-      </Menu.Item>
-    </Menu>
-  );
+
   const handleSignOut = () => {
     localStorage.removeItem("accessToken"); // Clear access token from local storage
     window.location.reload(); // Refresh the page
@@ -124,28 +116,7 @@ export default function Navbar() {
               </li>
               <SignedIn>
                 <li>
-                  <Dropdown overlay={coursMenu} className="flex flex-row">
-                    <a
-                      className="ant-dropdown-link"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      Cours
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        className={`w-4 h-4 ml-1 mt-0.5 transition-transform ${
-                          state ? "transform rotate-180" : ""
-                        }`}
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M4.293 7.293a1 1 0 011.414 0L12 13.586l6.293-6.293a1 1 0 111.414 1.414l-7 7a1 1 0 01-1.414 0l-7-7a1 1 0 010-1.414z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                  </Dropdown>
+                  <CourseDropDown />
                 </li>
               </SignedIn>
               {navigation.map((item, idx) => (

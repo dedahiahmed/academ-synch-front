@@ -31,7 +31,7 @@ export default function SignIn() {
       const responseData = await response.json();
       localStorage.clear();
       localStorage.setItem("accessToken", responseData.access_token);
-      window.location.href = "/home";
+      window.location.href = "/";
     } catch (error: any) {
       console.error("Error:", error);
       setErrorMessage(error.message);
