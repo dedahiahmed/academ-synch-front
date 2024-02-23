@@ -27,6 +27,10 @@ const FcGrid: React.FC<FcGridProps> = ({ data }) => {
   }, [data]); // Reset currentPage whenever data changes
 
   const handleChangePage = (page: number) => {
+    // Scroll to the top of the page
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // Update the current page
     setCurrentPage(page);
   };
 
@@ -47,7 +51,7 @@ const FcGrid: React.FC<FcGridProps> = ({ data }) => {
           description={item.description}
         />
       ))}
-      <div className="text-right mt-4">
+      <div className="text-right my-4">
         <Pagination
           current={currentPage}
           total={data.length}
