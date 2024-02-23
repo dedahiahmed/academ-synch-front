@@ -1,35 +1,37 @@
-"use client";
 import React from "react";
 import Image from "next/image";
+import { Dropdown, Menu } from "antd";
+
 export default function Navbar() {
   const [state, setState] = React.useState(false);
-  const [currentPath, setCurrentPath] = React.useState(
-    window.location.pathname
-  );
 
   const navigation = [
     { title: "Courses", path: "/courses" },
-    { title: "Formations", path: "/formation" },
     { title: "Customers", path: "/customers" },
     { title: "Pricing", path: "/pricing" },
   ];
 
-  React.useEffect(() => {
-    const handleRouteChange = () => {
-      setCurrentPath(window.location.pathname);
-    };
+  const handleNavigation = (path: string) => {
+    window.location.href = path; // Redirect using anchor tag
+  };
 
-    window.addEventListener("popstate", handleRouteChange);
-
-    return () => {
-      window.removeEventListener("popstate", handleRouteChange);
-    };
-  }, []);
+  const formationMenu = (
+    <Menu>
+      <Menu.Item key="1" onClick={() => handleNavigation("/mpiage")}>
+        MPIAGE
+      </Menu.Item>
+      <Menu.Item key="2" onClick={() => handleNavigation("/mpfc")}>
+        MPFC
+      </Menu.Item>
+    </Menu>
+  );
 
   return (
     <>
       <nav
-        className={`relative z-20 bg-white w-full md:static md:text-sm md:border-none ${state ? "shadow-lg rounded-b-xl md:shadow-none" : ""}`}
+        className={`relative z-20 bg-white w-full md:static md:text-sm md:border-none ${
+          state ? "shadow-lg rounded-b-xl md:shadow-none" : ""
+        }`}
       >
         <div className="items-center gap-x-14 px-4 max-w-screen-xl mx-auto md:flex md:px-8">
           <div className="flex items-center justify-between py-3 md:py-5 md:block">
@@ -77,23 +79,49 @@ export default function Navbar() {
             </div>
           </div>
           <div
-            className={`nav-menu flex-1 pb-3 mt-8 md:block md:pb-0 md:mt-0 ${state ? "block" : "hidden"} `}
+            className={`nav-menu flex-1 pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
+              state ? "block" : "hidden"
+            } `}
           >
             <ul className="items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
               {navigation.map((item, idx) => (
                 <li key={idx}>
                   <a
                     href={item.path}
-                    className={`block text-gray-700 hover:text-indigo-600 ${currentPath === item.path ? "border-b-2 border-sky-500 " : ""}`}
+                    className={`block text-gray-700 hover:text-indigo-600`}
                   >
                     {item.title}
                   </a>
                 </li>
               ))}
+              <li>
+                <Dropdown overlay={formationMenu} className="flex flex-row">
+                  <a
+                    className="ant-dropdown-link"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    Formation
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className={`w-4 h-4 ml-1 mt-0.5 transition-transform ${
+                        state ? "transform rotate-180" : ""
+                      }`}
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M4.293 7.293a1 1 0 011.414 0L12 13.586l6.293-6.293a1 1 0 111.414 1.414l-7 7a1 1 0 01-1.414 0l-7-7a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </a>
+                </Dropdown>
+              </li>
               <div className="flex-1 items-center justify-end gap-x-6 space-y-3 md:flex md:space-y-0">
                 <li>
                   <a
-                    href="#"
+                    href="signup"
                     className="block py-3 text-center text-gray-700 hover:text-indigo-600 border rounded-lg md:border-none"
                   >
                     créer un compte
@@ -101,7 +129,7 @@ export default function Navbar() {
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="signin"
                     className="block py-3 px-4 font-medium text-center text-white bg-sky-500 hover:bg-sky-600 active:bg-sky-700 active:shadow-none rounded-lg shadow md:inline"
                   >
                     se connecter

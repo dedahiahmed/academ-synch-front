@@ -1,0 +1,169 @@
+[
+  {
+    "semestre": "S1",
+    "type_du_module": "OBLIGATOIRE",
+    "intitulé_du_module": "Comptabilité sectorielle",
+    "number_of_hours": 46,
+    "credits": 6
+  },
+  {
+    "semestre": "S1",
+    "type_du_module": "OBLIGATOIRE",
+    "intitulé_du_module": "Consolidation des entreprises",
+    "number_of_hours": 26,
+    "credits": 3
+  },
+  {
+    "semestre": "S1",
+    "type_du_module": "OBLIGATOIRE",
+    "intitulé_du_module": "Théorie financière",
+    "number_of_hours": 46,
+    "credits": 5
+  },
+  {
+    "semestre": "S1",
+    "type_du_module": "OBLIGATOIRE",
+    "intitulé_du_module": "Droit des sociétés",
+    "number_of_hours": 26,
+    "credits": 3
+  },
+  {
+    "semestre": "S1",
+    "type_du_module": "OBLIGATOIRE",
+    "intitulé_du_module": "Contrôle de gestion approfondi",
+    "number_of_hours": 46,
+    "credits": 5
+  },
+  {
+    "semestre": "S1",
+    "type_du_module": "OBLIGATOIRE",
+    "intitulé_du_module": "Fiscalité approfondie",
+    "number_of_hours": 46,
+    "credits": 5
+  },
+  {
+    "semestre": "S1",
+    "type_du_module": "OPTIONNEL",
+    "intitulé_du_module": "Communication et Développement personnel",
+    "number_of_hours": 26,
+    "credits": 2
+  },
+  {
+    "semestre": "S1",
+    "type_du_module": "OPTIONNEL",
+    "intitulé_du_module": "Anglais des affaires",
+    "number_of_hours": 26,
+    "credits": 2
+  },
+  {
+    "semestre": "S2",
+    "type_du_module": "OBLIGATOIRE",
+    "intitulé_du_module": "Normes comptables internationales",
+    "number_of_hours": 46,
+    "credits": 6
+  },
+  {
+    "semestre": "S2",
+    "type_du_module": "OBLIGATOIRE",
+    "intitulé_du_module": "Audit financier et révision des comptes",
+    "number_of_hours": 26,
+    "credits": 3
+  },
+  {
+    "semestre": "S2",
+    "type_du_module": "OBLIGATOIRE",
+    "intitulé_du_module": "Finance internationale",
+    "number_of_hours": 46,
+    "credits": 5
+  },
+  {
+    "semestre": "S2",
+    "type_du_module": "OBLIGATOIRE",
+    "intitulé_du_module": "Analyse stratégique",
+    "number_of_hours": 46,
+    "credits": 6
+  },
+  {
+    "semestre": "S2",
+    "type_du_module": "OBLIGATOIRE",
+    "intitulé_du_module": "Méthodes quantitatives",
+    "number_of_hours": 46,
+    "credits": 5
+  },
+  {
+    "semestre": "S2",
+    "type_du_module": "OBLIGATOIRE",
+    "intitulé_du_module": "Fiscalité internationale",
+    "number_of_hours": 26,
+    "credits": 3
+  },
+  {
+    "semestre": "S2",
+    "type_du_module": "OPTIONNEL",
+    "intitulé_du_module": "Analyse des données",
+    "number_of_hours": 26,
+    "credits": 2
+  },
+  {
+    "semestre": "S2",
+    "type_du_module": "OPTIONNEL",
+    "intitulé_du_module": "Théorie des marchés",
+    "number_of_hours": 26,
+    "credits": 2
+  },
+  {
+    "semestre": "S3",
+    "type_du_module": "OBLIGATOIRE",
+    "intitulé_du_module": "Comptabilité financière Avancée ",
+    "number_of_hours": 46,
+    "credits": 6
+  },
+  {
+    "semestre": "S3",
+    "type_du_module": "OBLIGATOIRE",
+    "intitulé_du_module": "Evaluation des entreprises",
+    "number_of_hours": 26,
+    "credits": 4
+  },
+  {
+    "semestre": "S3",
+    "type_du_module": "OBLIGATOIRE",
+    "intitulé_du_module": "Finance des marchés",
+    "number_of_hours": 46,
+    "credits": 5
+  },
+  {
+    "semestre": "S3",
+    "type_du_module": "OBLIGATOIRE",
+    "intitulé_du_module": "Stratégie d'entreprises",
+    "number_of_hours": 46,
+    "credits": 6
+  },
+  {
+    "semestre": "S3",
+    "type_du_module": "OBLIGATOIRE",
+    "intitulé_du_module": "Séries temporelles",
+    "number_of_hours": 46,
+    "credits": 5
+  },
+  {
+    "semestre": "S3",
+    "type_du_module": "OPTIONNEL",
+    "intitulé_du_module": "Droit pénal des affaires",
+    "number_of_hours": 26,
+    "credits": 4
+  },
+  {
+    "semestre": "S3",
+    "type_du_module": "OPTIONNEL",
+    "intitulé_du_module": "Méthodologie de recherche",
+    "number_of_hours": 26,
+    "credits": 4
+  },
+  {
+    "semestre": "S4",
+    "type_du_module": "OBLIGATOIRE",
+    "intitulé_du_module": "Mémoire ou Stage de Fin d’Etudes",
+    "credits": 30
+  }
+]

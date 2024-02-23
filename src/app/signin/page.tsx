@@ -1,13 +1,14 @@
 "use client";
 import Navbar from "@/components/Navbar/Navbar";
-import SignUp from "@/components/SignUp/SignUp";
+import SignIn from "@/components/SignIn/SignIn";
 import React from "react";
 
 export default function page() {
   return (
     <div>
+      {" "}
       <Navbar />
-      <SignUp />
+      <SignIn />
     </div>
   );
 }

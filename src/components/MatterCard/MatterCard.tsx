@@ -31,7 +31,7 @@ export default function MatterCard({
   return (
     <div>
       <div className="max-w-4xl px-10 my-4 py-6 bg-white rounded-lg shadow-md mb-4">
-        <div className="flex justify-between items-center">
+        <div className="flex  lg:justify-between lg:items-center flex-col-reverse lg:flex-row">
           <span className="font-light text-gray-600">
             {convertSemesterLabel(semestre)}
           </span>
