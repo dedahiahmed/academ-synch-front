@@ -20,14 +20,15 @@ export default function CourseForm() {
   const onSubmit = async (data: courseType) => {
     try {
       const accessToken = localStorage.getItem("accessToken") as string;
-      // await getCurrentUser(accessToken);
+      const responseTeacher = await getCurrentUser(accessToken);
+      const TeacherId = responseTeacher.id;
       //  Upload files
       const uploadedFileIds = await uploadMultiplesFiles("course", files);
 
       // Construct request data with uploaded file UUIDs
       const requestData = {
         ...data,
-        teacher_id: 1,
+        teacher_id: TeacherId,
         files: uploadedFileIds,
       };
 
@@ -74,6 +75,21 @@ export default function CourseForm() {
             {/* founded*/}
 
             {/*City */}
+            <p className=" mb-[0.37rem] font-text text-[0.875rem] font-[500] leading-[1.375rem]  lg:mb-[0.5rem] lg:text-[0.9375rem] lg:leading-[1.25rem]">
+              Titre* :
+            </p>
+            <input
+              type="text "
+              className="
+             flex  w-full  items-center  rounded-lg border
+            border-stone-900  font-text   mb-[0.5rem]  h-[3.125rem] gap-[0.625rem] py-[0.9375rem] pl-[0.625rem] pr-[2.5rem]"
+              {...register("title", {
+                required: `Vous devez fournir un titre à votre Cours`,
+              })}
+            />
+            <p className=" mb-[1.87rem] font-text text-[0.875rem] font-[500] leading-[1.375rem]  text-[#C54141] lg:mb-[1.87rem] lg:text-[0.9375rem] lg:leading-[1.25rem]">
+              {errors.title?.message}
+            </p>
             <div className="flex flex-col  gap-[0.5rem] ">
               <p className=" mb-[0.37rem] font-text text-[0.875rem] font-[500] leading-[1.375rem]  lg:mb-[0.5rem] lg:text-[0.9375rem] lg:leading-[1.25rem]">
                 semester
