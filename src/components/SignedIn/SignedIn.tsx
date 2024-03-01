@@ -1,6 +1,6 @@
+import { accessToken } from "@/utils/token/token";
+import { getCurrentUser } from "@/utils/user-me/userme";
 import React, { ReactNode, useEffect, useState } from "react";
-import { getCurrentUser } from "../../../utils/user-me/userme";
-import { accessToken } from "../../../utils/token/token";
 
 export default function SignedIn({ children }: { children: ReactNode }) {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
@@ -8,7 +8,8 @@ export default function SignedIn({ children }: { children: ReactNode }) {
   useEffect(() => {
     const checkAuthentication = async () => {
       try {
-        await getCurrentUser(accessToken);
+        await getCurrentUser();
+        console.log("token", accessToken);
         setIsLoggedIn(true);
       } catch (error) {
         setIsLoggedIn(false);

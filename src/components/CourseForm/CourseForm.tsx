@@ -11,9 +11,9 @@ import {
 import { FormProvider, useForm } from "react-hook-form";
 import Navbar from "../Navbar/Navbar";
 import { BrowserRouter } from "react-router-dom";
-import uploadFiles from "../../../utils/upload-file/upload-file";
-import { getCurrentUser } from "../../../utils/user-me/userme";
-import uploadMultiplesFiles from "../../../utils/upload-files/upload-files";
+import { getCurrentUser } from "@/utils/user-me/userme";
+import uploadMultiplesFiles from "@/utils/upload-files/upload-files";
+
 
 export default function CourseForm() {
   const [files, setFiles] = useState<File[]>([]);
@@ -23,7 +23,7 @@ export default function CourseForm() {
   const onSubmit = async (data: courseType) => {
     try {
       const accessToken = localStorage.getItem("accessToken") as string;
-      const responseTeacher = await getCurrentUser(accessToken);
+      const responseTeacher = await getCurrentUser();
       const TeacherId = responseTeacher.id;
       //  Upload files
       const uploadedFileIds = await uploadMultiplesFiles("course", files);

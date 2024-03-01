@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { FormProvider, useForm } from "react-hook-form";
-
+import Cookies from "js-cookie";
+import CryptoJS from "crypto-js";
 export default function SignIn() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null); // State variable to store error message
   const methods = useForm<login>({ mode: "all" });
@@ -30,7 +31,13 @@ export default function SignIn() {
 
       const responseData = await response.json();
       localStorage.clear();
+      Cookies.remove("accessToken");
+      const encryptedToken = CryptoJS.AES.encrypt(
+        responseData.access_token,
+        "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcwNzg2MjU4NCwiaWF0IjoxNzA3ODYyNTg0fQ.5Ab6-iu6ds1--VS6JG5aLkpKSJggIL6f8c-nam79pPM"
+      ).toString();
       localStorage.setItem("accessToken", responseData.access_token);
+      Cookies.set("accessToken", encryptedToken);
       window.location.href = "/";
     } catch (error: any) {
       console.error("Error:", error);

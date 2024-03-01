@@ -1,8 +1,9 @@
 import { Dropdown, Menu } from "antd";
 import React, { useEffect, useState } from "react";
-import { getCurrentUser } from "../../../../../utils/user-me/userme";
+
 import { access } from "fs";
-import { accessToken } from "../../../../../utils/token/token";
+import { getCurrentUser } from "@/utils/user-me/userme";
+import { accessToken } from "@/utils/token/token";
 
 export default function CourseDropDown() {
   const [state, setState] = useState(false);
@@ -12,7 +13,7 @@ export default function CourseDropDown() {
     const fetchUserData = async () => {
       try {
         // Fetch the current user's data
-        const userData = await getCurrentUser(accessToken);
+        const userData = await getCurrentUser();
         // Update the role state
         setUserRole(userData.role);
       } catch (error) {

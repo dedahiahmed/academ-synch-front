@@ -1,25 +1,36 @@
+import { accessToken } from "@/utils/token/token";
+import CryptoJS from "crypto-js";
+import Cookies from "js-cookie";
+
+const secretKey =
+  "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcwNzg2MjU4NCwiaWF0IjoxNzA3ODYyNTg0fQ.5Ab6-iu6ds1--VS6JG5aLkpKSJggIL6f8c-nam79pPM";
+
 export async function GET(request: Request): Promise<Response> {
   try {
     const url = process.env.USERME || "";
 
-    // Retrieve the token from the request headers
-    const token = request.headers.get("Authorization");
+    // Retrieve the encrypted token from cookies
+    const encryptedToken = Cookies.get("accessToken");
 
-    const headers: Record<string, string> = {
-      "Content-Type": "application/json",
-    };
-
-    // Only include the Authorization header if token is not null
-    if (token !== null) {
-      headers.Authorization = `Bearer ${token}`;
-      console.log("token", token);
+    // Decrypt the token
+    let token = "";
+    if (encryptedToken) {
+      try {
+        const bytes = CryptoJS.AES.decrypt(encryptedToken, secretKey);
+        token = bytes.toString(CryptoJS.enc.Utf8);
+      } catch (error) {
+        console.error("Error decrypting token:", error);
+      }
     }
 
     const response = await fetch(url, {
       method: "GET",
-      headers: headers,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
     });
-
+    console.log("hedader", JSON.stringify(accessToken));
     // Parse the JSON body if it's present
     let responseBody;
     try {

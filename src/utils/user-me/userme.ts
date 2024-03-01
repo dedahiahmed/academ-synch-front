@@ -1,12 +1,10 @@
-export async function getCurrentUser(
-  token: string
-): Promise<Record<string, any>> {
+export async function getCurrentUser(): Promise<Record<string, any>> {
   try {
     const response = await fetch("/api/userme", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: token, // Include the authorization token
+        // Do not include the Authorization header
       },
     });
 
