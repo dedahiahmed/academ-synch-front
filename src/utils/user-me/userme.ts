@@ -1,13 +1,15 @@
+import { accessToken } from "../token/token";
+
 export async function getCurrentUser(): Promise<Record<string, any>> {
   try {
     const response = await fetch("/api/userme", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        // Do not include the Authorization header
+        Authorization: accessToken, // Include the authorization token
       },
     });
-
+    console.log("tokwnfinodv", accessToken);
     if (!response.ok) {
       throw new Error("Failed to fetch current user data");
     }
