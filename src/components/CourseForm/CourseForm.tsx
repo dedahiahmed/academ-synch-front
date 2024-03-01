@@ -58,7 +58,7 @@ export default function CourseForm() {
   };
 
   return (
-    <div className="bg-gray-100 ">
+    <div className="bg-gray-100 pb-[2rem] ">
       <BrowserRouter>
         <Navbar />
       </BrowserRouter>
