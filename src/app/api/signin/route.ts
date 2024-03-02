@@ -29,7 +29,7 @@ export async function POST(request: Request): Promise<Response> {
           acc[key] = value;
           return acc;
         },
-        {},
+        {}
       ),
       body: responseBody,
     };

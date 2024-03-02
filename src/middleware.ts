@@ -1,16 +1,23 @@
 // middleware.ts
 import { NextRequest, NextResponse } from "next/server";
-import { isTeacher } from "./utils/user-checker/teacher-checker/teacher-checker";
-import { isAdmin } from "./utils/user-checker/admin-checker/admin.checker";
+import { getCurrentUser } from "./utils/server-user/server-user";
 
 export const middleware = async (req: NextRequest) => {
   const restrictedRoutes = ["/new-course", "/gestion-cours"];
   const { pathname } = req.nextUrl;
   if (restrictedRoutes.includes(pathname)) {
     try {
-      const isAuthorized = (await isTeacher()) || (await isAdmin());
-      console.log("use_fbubjksd", isAuthorized);
-      if (!isAuthorized) {
+      // Fetch user data using the function
+      const userData = await getCurrentUser(req);
+      console.log("userData:", userData);
+
+      // Check if user is authorized based on role
+      if (!userData || !userData.role) {
+        return NextResponse.redirect(new URL("/", req.url));
+      }
+
+      // Add additional role-based authorization logic if needed
+      if (userData.role !== "ADMIN" && userData.role !== "TEACHER") {
         return NextResponse.redirect(new URL("/", req.url));
       }
 
