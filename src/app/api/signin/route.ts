@@ -11,14 +11,16 @@ export async function POST(request: Request): Promise<Response> {
       body: JSON.stringify(requestData), // Pass the JSON data directly
     });
 
-    // Parse the JSON body if it's present
-    let responseBody;
-    try {
-      responseBody = await response.json();
-    } catch (error) {
-      // Log and handle any parsing errors
-      console.log("Error parsing response JSON:", error);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch: ${response.statusText}`);
     }
+
+    // Parse the JSON body if it's present
+    const responseBody = await response.json();
+    const { access_token } = responseBody;
+
+    // Set the access_token in cookies
+    const cookies = `access_token=${access_token}; Path=/; HttpOnly; SameSite=Strict`;
 
     // Log the response details
     const logResponse = {
@@ -38,7 +40,10 @@ export async function POST(request: Request): Promise<Response> {
     return new Response(JSON.stringify(responseBody), {
       status: response.status,
       statusText: response.statusText,
-      headers: response.headers,
+      headers: {
+        ...response.headers,
+        "Set-Cookie": cookies,
+      },
     });
   } catch (error) {
     // Log and handle any other errors
