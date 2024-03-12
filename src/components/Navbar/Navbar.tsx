@@ -163,7 +163,10 @@ export default function Navbar() {
                     </button>
                   </li>
                 </SignedIn>
-                <NotificationBadge />
+                <SignedIn>
+                 
+                  <NotificationBadge />
+                </SignedIn>
               </div>
             </ul>
           </div>
