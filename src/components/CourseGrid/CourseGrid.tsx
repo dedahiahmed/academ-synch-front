@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-
-import { Pagination } from "antd";
-
+import { Pagination, Skeleton } from "antd";
 import CourseCard from "../CourseCard/CourseCard";
 
 interface CourseGridProps {
@@ -11,24 +9,23 @@ interface CourseGridProps {
     type: string;
     semester: string;
     teacher: {
-      matter: string;
+      matter?: string;
     };
   }[];
+  files: CourseUrl[];
 }
 
-
-const CourseGrid: React.FC<CourseGridProps> = ({ data }) => {
+const CourseGrid: React.FC<CourseGridProps> = ({ data, files }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 5; // Number of items per page
-
-  // Update currentPage to 1 whenever a filter is changed
-  const handleFilterChange = () => {
-    setCurrentPage(1);
-  };
+  const pageSize = 5;
+  const [isLoading, setIsLoading] = useState(true); // State to track loading
 
   useEffect(() => {
-    handleFilterChange();
-  }, [data]); // Reset currentPage whenever data changes
+    setIsLoading(true); // Set loading to true when data changes
+    setTimeout(() => {
+      setIsLoading(false); // Simulating data loading completion
+    }, 1000); // Adjust the timeout as needed
+  }, [data]);
 
   const handleChangePage = (page: number) => {
     setCurrentPage(page);
@@ -41,23 +38,40 @@ const CourseGrid: React.FC<CourseGridProps> = ({ data }) => {
 
   return (
     <div>
-      {renderData.map((item, idx) => (
-        <CourseCard
-          key={idx}
-          title={item.title}
-          matter={item.teacher.matter}
-          semester={item.semester}
-          type={item.type}
-        />
-      ))}
-      <div className="text-right mt-4">
-        <Pagination
-          current={currentPage}
-          total={data.length}
-          pageSize={pageSize}
-          onChange={handleChangePage}
-        />
-      </div>
+      {isLoading ? ( // Display skeleton when loading
+        <div>
+          {[...Array(pageSize)].map((_, index) => (
+            <Skeleton key={index} active />
+          ))}
+        </div>
+      ) : (
+        <>
+          {data.length === 0 ? ( // Display message if no data
+            <p>Aucun cours n'a été téléchargé pour le moment.</p>
+          ) : (
+            <>
+              {renderData.map((item, idx) => (
+                <CourseCard
+                  key={idx}
+                  title={item.title}
+                  semester={item.semester}
+                  files={files}
+                  type={item.type}
+                  matter={item.teacher ? item.teacher.matter : undefined}
+                />
+              ))}
+              <div className="text-right mt-4">
+                <Pagination
+                  current={currentPage}
+                  total={data.length}
+                  pageSize={pageSize}
+                  onChange={handleChangePage}
+                />
+              </div>
+            </>
+          )}
+        </>
+      )}
     </div>
   );
 };

@@ -1,10 +1,9 @@
-import { subabaseClient } from "@/utils/supabase/client";
+import { supabase } from "@/utils/supabase/supabase";
+
 export const getPublicUrlForAvisUrl = (
   buketName: string,
   fileName: string
 ): string => {
-  const { data } = subabaseClient.storage
-    .from(buketName)
-    .getPublicUrl(fileName);
+  const { data } = supabase.storage.from(buketName).getPublicUrl(fileName);
   return data.publicUrl;
 };

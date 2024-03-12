@@ -4,6 +4,8 @@ import { Dropdown, Menu } from "antd";
 import SignedIn from "../SignedIn/SignedIn";
 import SignedOut from "../SignedOut/SignedOut";
 import CourseDropDown from "./Components/CourseDropDown/CourseDropDown";
+import { IoNotifications } from "react-icons/io5";
+import NotificationBadge from "../NotificationBadge/NotificationBadge";
 
 export default function Navbar() {
   const [state, setState] = React.useState(false);
@@ -161,6 +163,7 @@ export default function Navbar() {
                     </button>
                   </li>
                 </SignedIn>
+                <NotificationBadge />
               </div>
             </ul>
           </div>

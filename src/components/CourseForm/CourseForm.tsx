@@ -13,16 +13,19 @@ import Navbar from "../Navbar/Navbar";
 import { BrowserRouter } from "react-router-dom";
 import { getCurrentUser } from "@/utils/user-me/userme";
 import uploadMultiplesFiles from "@/utils/upload-files/upload-files";
-
+import { Spin } from "antd";
+import { accessToken } from "@/utils/token/token";
 
 export default function CourseForm() {
   const [files, setFiles] = useState<File[]>([]);
+  const [loading, setLoading] = useState(false);
   const form = useForm<courseType>({ mode: "all" });
   const { register, handleSubmit, formState, reset, control } = form;
   const { errors } = formState;
   const onSubmit = async (data: courseType) => {
     try {
-      const accessToken = localStorage.getItem("accessToken") as string;
+      setLoading(true);
+
       const responseTeacher = await getCurrentUser();
       const TeacherId = responseTeacher.id;
       //  Upload files
@@ -40,6 +43,7 @@ export default function CourseForm() {
         method: "POST",
         headers: {
           Authorization: accessToken,
+
           "Content-Type": "application/json",
         },
         body: JSON.stringify(requestData),
@@ -54,6 +58,9 @@ export default function CourseForm() {
       console.log("-----------", responseData);
     } catch (error: any) {
       console.error("Error:", error);
+    } finally {
+      setLoading(false);
+       // Set loading to false when request completes
     }
   };
 
@@ -129,7 +136,7 @@ export default function CourseForm() {
                 fichier* :
               </p>
               <FileInput
-                acceptedTypes={imagesTypeList}
+                acceptedTypes={filesTypeList}
                 limit={true}
                 valueSetter={setFiles}
                 files={files}
@@ -146,7 +153,8 @@ px-[2.25rem] py-[0.9375rem]
   "
             >
               <p className="font-text text-[0.9375rem]  font-[500] leading-[1.375rem] text-white lg:text-[1.125rem] lg:leading-[1.625rem]">
-                enregistrer
+                {loading ? <Spin /> : "Enregistrer"}{" "}
+                {/* Render Spin component if loading is true */}
               </p>
             </button>
           </form>

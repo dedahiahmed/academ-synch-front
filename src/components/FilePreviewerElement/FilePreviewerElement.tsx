@@ -1,6 +1,6 @@
 import { imagesTypeList } from "@/data/data-base/file-types/file-types";
+import { extensionChecker } from "@/utils/extension-checker/extension-checker";
 import Image from "next/image";
-import { extensionChecker } from "../../../utils/extension-checker/extension-checker";
 
 export default function FilePreviewerElement({
   file,
