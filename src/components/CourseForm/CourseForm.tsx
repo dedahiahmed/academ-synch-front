@@ -60,7 +60,8 @@ export default function CourseForm() {
       console.error("Error:", error);
     } finally {
       setLoading(false);
-       // Set loading to false when request completes
+      window.location.href = "/gestion-cours";
+      // Set loading to false when request completes
     }
   };
 

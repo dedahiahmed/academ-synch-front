@@ -62,6 +62,9 @@ export default function page() {
       [atribut]: value,
     }));
   };
+  const filteredData = values.semestre.length
+    ? courses.filter((item) => values.semestre.includes(item.semester))
+    : courses;
   console.log("-----------files", files);
   return (
     <>
@@ -88,7 +91,7 @@ export default function page() {
           </div>
 
           <div className="w-full lg:flex-[2] flex-col gap-[1.56rem] ">
-            <CourseGrid data={courses} files={files} />
+            <CourseGrid data={filteredData} files={files} />
           </div>
         </div>
       </div>

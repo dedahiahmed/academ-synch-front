@@ -43,12 +43,26 @@ export default function CourseDropDown() {
       }
     }
   };
+  const handleLireCoursClick = () => {
+    // Check if the user is a teacher or admin, if yes, redirect them to "/gestion-cours"
+    if (userRole === "STUDENT" || userRole === "ADMIN") {
+      handleNavigation("/course");
+    } else {
+      // Display a modal informing the user that only teachers or admins have access
+      const modal = document.getElementById(
+        "teacher-require-modal"
+      ) as HTMLDialogElement | null;
+      if (modal) {
+        modal.showModal();
+      }
+    }
+  };
   const coursMenu = (
     <Menu>
       <Menu.Item key="1" onClick={() => handleGestionCoursClick()}>
         Gestion des cours
       </Menu.Item>
-      <Menu.Item key="2" onClick={() => handleGestionCoursClick()}>
+      <Menu.Item key="2" onClick={() => handleLireCoursClick()}>
         Lire le cours
       </Menu.Item>
     </Menu>

@@ -34,7 +34,9 @@ export default function NotificationBadge() {
   const menu = (
     <Menu>
       {unseenCourses.map((course) => (
-        <Menu.Item key={course.id}>{course.title}</Menu.Item>
+        <Menu.Item key={course.id}>
+          <a href="/course">{course.title}</a>
+        </Menu.Item>
       ))}
     </Menu>
   );

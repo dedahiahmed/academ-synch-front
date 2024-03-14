@@ -2,8 +2,9 @@
 import React from "react";
 import Image from "next/image";
 import { FormProvider, useForm } from "react-hook-form";
-import { createUser } from "../../../utils/CreateUser/CreateUser";
+
 import InputText from "../InputText/InputText";
+import { createUser } from "@/utils/CreateUser/CreateUser";
 export default function SignUp() {
   const methods = useForm<SignUp>({ mode: "all" });
   const {
